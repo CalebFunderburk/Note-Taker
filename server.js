@@ -2,9 +2,7 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-
-// Database
-const { notes } = require('./db/db.json')
+const uniqid = require('uniqid')
 
 // Format express
 const app = express()
@@ -15,10 +13,44 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
 
-// Route to display previously saved notes
+// API GET route to display previously saved notes
 app.get('/api/notes', (req, res) => {
+
+    // Save data from db.json to a variable
     let savedNotes = fs.readFileSync('./db/db.json', 'utf8')
+
+    // Return a response a of parsed json data from db.json
     res.json(JSON.parse(savedNotes))
+})
+
+// API POST route to add new notes
+app.post('/api/notes', (req, res) => {
+    
+    // Store new note as an object
+    const newNote = {
+        ...req.body,
+        id: uniqid()
+    }
+
+    // Save data from db.json as a variable
+    let savedNotes = fs.readFileSync('./db/db.json', 'utf8')
+
+    // Parse data from db.json and save it as a variable
+    let notesData = JSON.parse(savedNotes)
+
+    // Add newNote to db.json array
+    notesData.push(newNote)
+
+    // Write the data from newNote to db.json
+    fs.writeFile('./db/db.json', JSON.stringify(notesData), (err, text) => {
+        if (err) {
+            console.log(err)
+            return
+        }
+    })
+
+    // Return a response of parsed json data from db.json
+    res.json(savedNotes)
 })
 
 // Route to index.html
