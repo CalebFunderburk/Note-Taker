@@ -53,6 +53,31 @@ app.post('/api/notes', (req, res) => {
     res.json(savedNotes)
 })
 
+// API DELETE route to delete notes
+app.delete('/api/notes/:id', (req, res) => {
+    // Save data from db.json to a variable
+    let savedNotes = fs.readFileSync('./db/db.json', 'utf8')
+
+    // Parse data from db.json and save it as a variable
+    let notesData = JSON.parse(savedNotes)
+
+    // Filter the array of notes
+    const notes = notesData.filter((note) => {
+        return note.id !== req.params.id
+    })
+
+    // Write the new array to db.json
+    fs.writeFile('./db/db.json', JSON.stringify(notes), (err, text) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+    })
+
+    // Return a response of parsed json data from db.json
+    res.json(notes)
+})    
+
 // Route to index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'))
