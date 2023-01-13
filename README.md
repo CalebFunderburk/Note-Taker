@@ -12,7 +12,7 @@ As a user looking for a way to keep track of notes, I would like an application 
 
 ### Features
 
-1. Notes are stored to local storage.
+1. Notes are saved to local storage.
 2. Note Taker is built with Bootstrap and is fully mobile responsive.
 3. Because this application runs on an Express.js server, it has been deployed using Heroku.
 
