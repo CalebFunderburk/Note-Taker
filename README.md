@@ -8,7 +8,7 @@ Note Taker is an app that a user can use to create, save, view, and delete notes
 
 ### User Story
 
-As a user looking for a way to keep track of notes, I would like an application that allows me to write things down, store them for later to edit them if I would like, or delete them if needed. When I am on the homepage, I am presented with a clean slate and a button to add a note. Once I have added a note, I can either edit that note, delete it, or create a new one.
+As a user looking for a way to keep track of notes, I would like an application that allows me to write things down, store them for later to edit them, or delete them as needed. When I am on the homepage, I am presented with a clean slate and a button to add a note. Once I have added a note, I can either edit that note, delete it, or create a new one.
 
 ### Features
 
